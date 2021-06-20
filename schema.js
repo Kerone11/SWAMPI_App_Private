@@ -5,15 +5,16 @@ const { ApolloClient } = require('apollo-client');
 
 const typeDefs = gql`
 type Query{ 
-    People: String
+    people(name: String): [People!]!, 
+    allPeople: [People!]!
 }
 
 type People{
-    name: String
-    height: String
-    mass: String 
-    gender: String 
-    homeworld: String
+    name: String!
+    height: String!
+    mass: String! 
+    gender: String! 
+    homeworld: String!
 }
 `;
 

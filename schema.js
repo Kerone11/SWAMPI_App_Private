@@ -4,18 +4,23 @@ const { ApolloClient } = require('apollo-client');
 
 
 const typeDefs = gql`
-type Query{ 
-    people(name: String): [People!]!, 
-    allPeople: [People!]!
-}
-
-type People{
-    name: String!
-    height: String!
-    mass: String! 
-    gender: String! 
-    homeworld: String!
-}
-`;
+     type Query{
+         Users: ReturnData
+         specificUser(name: String): ReturnData
+         findByPage(page: Int): ReturnData
+         }
+    type ReturnData {
+        count: Int
+        next: String
+        previous: String
+        results: [Users]
+    }
+    type Users{
+        name: String 
+        height: String
+        mass: String 
+        gender: String 
+        homeworld: String 
+    }`;
 
 module.exports = typeDefs;

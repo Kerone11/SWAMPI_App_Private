@@ -1,13 +1,6 @@
-const resolvers = {
-    Query: {
-        people: ({name}, _, {datasources}) => {
-            return datasources.swAPI.getPeople(name); 
-        }, 
-        allPeople: (_, __, {datasources}) =>{
-            return datasources.swAPI.getAllPeople(); 
-        }
-    }
-
-};
+const resolver = {
+    Users: () => {return fetch(`${baseURL}`).then(response => response.json())},
+    specificUser: ({name}) => {return fetch(`${baseURL}?search=${name}`).then(response=>response.json())},
+    findByPage: ({page}) => {return fetch(`${baseURL}?page=${page}`).then(res=>res.json())} }
 
 module.exports = resolvers; 

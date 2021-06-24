@@ -8,4 +8,4 @@ import {resolver} from './resolvers';
 const app = express(); 
 const externalSchema = SCHEMA_Diff; 
 app.use('/test', graphqlHTTP({schema: externalSchema, rootValue: resolver(), graphiql: true}))
-app.listen(3000)
+app.listen(4000)

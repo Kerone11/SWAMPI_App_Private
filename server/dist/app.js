@@ -10,5 +10,5 @@ const resolvers_1 = require("./resolvers");
 const app = express_1.default();
 const externalSchema = schema_1.SCHEMA_Diff;
 app.use('/test', express_graphql_1.graphqlHTTP({ schema: externalSchema, rootValue: resolvers_1.resolver(), graphiql: true }));
-app.listen(3000);
+app.listen(4000);
 //# sourceMappingURL=app.js.map

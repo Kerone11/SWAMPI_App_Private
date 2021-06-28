@@ -1,23 +1,31 @@
-import { buildSchema } from 'graphql'; 
+import { gql} from "apollo-server";
+export const typeDefs = gql `
+    # User data returns an abject containing all the information for a user and thier homeworlds which is also an object.
+    type User {
+        # User name: String
+        name: String
+        # User Gender
+        gender: String
+        height: String
+        mass: String
+        # Homeworld object contauns information about users' lanet { name, population, species and many more}
+        homeworld: homeworld
+    }
 
-export const SCHEMA_Diff = buildSchema( 
-`
-     type Query{
-         Users: ReturnData
-         specificUser(name: String): ReturnData
-         findByPage(page: Int): ReturnData
-         }
-    type ReturnData {
+    type homeworld {
+        name: String
+        population: String
+        species: String
+    }
+    type ReturnData{
+        # Wraps User data as returnd from Swapi REST API.
+        results:[User]
         count: Int
         next: String
         previous: String
-        results: [Users]
     }
-    type Users{
-        name: String 
-        height: String
-        mass: String 
-        gender: String 
-        homeworld: String 
+    type Query {
+        Users: ReturnData 
+        findByPage(page: String): ReturnData
+        specificUser(name: String): ReturnData
     }`
-);

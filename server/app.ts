@@ -1,11 +1,12 @@
-import express from 'express';
-import {graphqlHTTP} from 'express-graphql';
-import { buildSchema } from 'graphql'; 
-import fetch from 'node-fetch'; 
-import {SCHEMA_Diff} from './schema'; 
-import {resolver} from './resolvers'; 
+import {typeDefs} from './schema';
+import { resolvers} from './resolvers';
 
-const app = express(); 
-const externalSchema = SCHEMA_Diff; 
-app.use('/test', graphqlHTTP({schema: externalSchema, rootValue: resolver(), graphiql: true}))
-app.listen(4000)
+import {ApolloServer} from "apollo-server";
+
+const server = new ApolloServer({
+    cors: {credentials: true, origin: '*'},
+    typeDefs,
+    resolvers
+})
+
+server.listen().then(({url})  => console.log('Swapi Server Running on ', url))

@@ -1,16 +1,16 @@
-import {graphqlHTTP} from 'express-graphql';
-import fetch from 'node-fetch'; 
+import fetch from "node-fetch";
+import { ReturnData } from "./interfaces";
+
+const baseURL = "https://swapi.dev/api/people";
 
 
-const baseURL = 'https://swapi.dev/api/people';
-
-export const resolver = () => { return {
-    findByPage: ({page}) => {return fetch(`${baseURL}?page=${page}`).then(res=>res.json())},
-   specificUser: ({name}) => {return fetch(`${baseURL}?search=${name}`).then(response=>response.json())},
-   Users: () => {return fetch(`${baseURL}`).then(response => response.json())}
-
-}
-   
-    
-    
+export const resolvers =  {
+    Query: {
+        Users: ( ): ReturnData =>  fetch(baseURL).then((e) => e.json()),
+        findByPage: (_,{page}, __, info): ReturnData =>  fetch(`${page}`).then((res) => res.json()),
+        specificUser: (_,{name}, __, info): ReturnData => fetch(`${baseURL}?search=${name}`).then(res => res.json())
+    },
+    User: {
+        homeworld: (user, __, info) => fetch(user.homeworld).then(u => u.json())
     }
+}

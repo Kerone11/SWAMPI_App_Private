@@ -1,24 +1,35 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SCHEMA_Diff = void 0;
-const graphql_1 = require("graphql");
-exports.SCHEMA_Diff = graphql_1.buildSchema(`
-     type Query{
-         Users: ReturnData
-         specificUser(name: String): ReturnData
-         findByPage(page: Int): ReturnData
-         }
-    type ReturnData {
+exports.typeDefs = void 0;
+const apollo_server_1 = require("apollo-server");
+exports.typeDefs = apollo_server_1.gql `
+    # User data returns an abject containing all the information for a user and thier homeworlds which is also an object.
+    type User {
+        # User name: String
+        name: String
+        # User Gender
+        gender: String
+        height: String
+        mass: String
+        # Homeworld object contauns information about users' lanet { name, population, species and many more}
+        homeworld: homeworld
+    }
+
+    type homeworld {
+        name: String
+        population: String
+        species: String
+    }
+    type ReturnData{
+        # Wraps User data as returnd from Swapi REST API.
+        results:[User]
         count: Int
         next: String
         previous: String
-        results: [Users]
     }
-    type Users{
-        name: String 
-        height: String
-        mass: String 
-        gender: String 
-        homeworld: String 
-    }`);
+    type Query {
+        Users: ReturnData 
+        findByPage(page: String): ReturnData
+        specificUser(name: String): ReturnData
+    }`;
 //# sourceMappingURL=schema.js.map

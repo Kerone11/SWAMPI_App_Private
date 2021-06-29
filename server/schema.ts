@@ -8,7 +8,7 @@ export const typeDefs = gql `
         gender: String
         height: String
         mass: String
-        # Homeworld object contauns information about users' lanet { name, population, species and many more}
+        # Homeworld object contauns information about users' planet { name, population, species and many more}
         homeworld: homeworld
     }
 
@@ -25,7 +25,7 @@ export const typeDefs = gql `
         previous: String
     }
     type Query {
-        Users: ReturnData 
+        Users: ReturnData
         findByPage(page: String): ReturnData
         specificUser(name: String): ReturnData
     }`

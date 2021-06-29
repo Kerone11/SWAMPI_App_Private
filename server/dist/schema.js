@@ -28,7 +28,7 @@ exports.typeDefs = apollo_server_1.gql `
         previous: String
     }
     type Query {
-        Users: ReturnData 
+        Users: ReturnData
         findByPage(page: String): ReturnData
         specificUser(name: String): ReturnData
     }`;

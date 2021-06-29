@@ -9,7 +9,7 @@ const baseURL = "https://swapi.dev/api/people";
 exports.resolvers = {
     Query: {
         Users: () => node_fetch_1.default(baseURL).then((e) => e.json()),
-        findByPage: (_, { page }, __, info) => node_fetch_1.default(`${page}`).then((res) => res.json()),
+        findByPage: (_, { page }, __, info) => node_fetch_1.default(`${baseURL}?page=${page}`).then((res) => res.json()),
         specificUser: (_, { name }, __, info) => node_fetch_1.default(`${baseURL}?search=${name}`).then(res => res.json())
     },
     User: {
